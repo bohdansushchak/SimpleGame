@@ -46,12 +46,12 @@ public class MenuListener : MonoBehaviour {
 
     public void Level1()
     {
-        //Application.LoadLevel(1); // для загрузки першого левелу
+        Application.LoadLevel(1); // для загрузки першого левелу
     }
 
     public void Level2()
     {
-        //Application.LoadLevel(2); // для загрузки першого левелу
+        Application.LoadLevel(2); // для загрузки першого левелу
     }
 
     public void Level3()
