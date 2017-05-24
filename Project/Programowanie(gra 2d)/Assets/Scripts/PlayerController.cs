@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour {
     bool facingRight;
 
 
+    bool grounded = false;
+    float groundCheckValue = 0.2f;
+    public LayerMask groundLayer;
+    public Transform groundCheck;
+    public float jumpHeight;
+
+
+
 	// Use this for initialization
 	void Start () {
         body = GetComponent<Rigidbody2D>();
@@ -21,9 +29,24 @@ public class PlayerController : MonoBehaviour {
         facingRight = true;
 
 	}
+
+    void Update(){
+        if (grounded && Input.GetAxis("Jump") > 0)
+        {
+            grounded = false;
+            anim.SetBool("isGround", true);
+            body.AddForce(new Vector2(0, jumpHeight));
+        }
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+
+
+
+        grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckValue, groundLayer);
+        anim.SetBool("isGround", grounded);
+        anim.SetFloat("verticalSpeed", body.velocity.y);
 
         float move = Input.GetAxis("Horizontal");  // може бути -1 або 1 (вправо або вліво)
         anim.SetFloat("speed", Mathf.Abs(move));
