@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-
+    //for run
     public float speed;
-
     Rigidbody2D body;
     Animator anim;
-
     bool facingRight;
 
-
+    //for jump
     bool grounded = false;
     float groundCheckValue = 0.2f;
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float jumpHeight;
+
+
+    //for shooting
+    public Transform gunTip;
+    public GameObject bullet1;
+    public GameObject bullet2;
+    public GameObject bullet3;
+    public GameObject bullet4;
+    float fireRate = 0.5f;
+    float nextFire = 0.0f;
+    int numGun = 0;
 
 
 
@@ -37,12 +46,39 @@ public class PlayerController : MonoBehaviour {
             anim.SetBool("isGround", true);
             body.AddForce(new Vector2(0, jumpHeight));
         }
+
+
+        if (Input.GetAxis("Fire1") > 0)
+            switch(numGun)
+            {
+                case 0:
+                    fire(bullet1);
+                    break;
+                case 1:
+                    fire(bullet2);
+                    break;
+                case 2:
+                    fire(bullet3);
+                    break;
+                case 3:
+                    fire(bullet4);
+                    break;
+            }
+
+        if (Input.GetAxis("Fire3") > 0)
+        {
+            if (numGun < 3)
+                ++numGun;
+            else
+                numGun = 0;
+        }
+
+
+
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-
-
 
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckValue, groundLayer);
         anim.SetBool("isGround", grounded);
@@ -61,13 +97,25 @@ public class PlayerController : MonoBehaviour {
         }
 	}
 
-    void flip()
-    {
+    void flip() {
+
         facingRight = !facingRight;
          Vector3 scale = transform.localScale;
          scale.x *= -1;
          transform.localScale = scale;
 
        
+    }
+
+    void fire(GameObject bullet) {
+        if(Time.time > nextFire){
+            nextFire = Time.time + fireRate;
+            if (facingRight) 
+                Instantiate(bullet, gunTip.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+
+            else
+                Instantiate(bullet, gunTip.position, Quaternion.Euler(new Vector3(0, 0, 180f)));
+            
+        }
     }
 }
