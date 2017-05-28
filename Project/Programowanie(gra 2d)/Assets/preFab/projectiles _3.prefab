@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 50899331619383866}
   - component: {fileID: 114877185112042402}
   - component: {fileID: 114806221114454010}
-  - component: {fileID: 61949636509138212}
   - component: {fileID: 114155792083854804}
+  - component: {fileID: 58100377159372424}
   m_Layer: 0
   m_Name: projectiles _3
   m_TagString: Untagged
@@ -65,8 +65,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &61949636509138212
-BoxCollider2D:
+--- !u!58 &58100377159372424
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -78,7 +78,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.07}
+  m_Radius: 0.2
 --- !u!114 &114155792083854804
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -90,8 +90,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dabd81c26fa9c34b8f2912ba6d5cc92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponDamage: 20
-  explosionEffect: {fileID: 1357284403748104, guid: 8f5feeec6e6b5524f91337d554d8e7b8,
+  WeaponDamage: 30
+  explosionEffect: {fileID: 1221980095713080, guid: 86fbc7dede65f3047940c83fb52aecbf,
     type: 2}
 --- !u!114 &114806221114454010
 MonoBehaviour:
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a00ebadac068cc44b9a414dc89e8a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 15
 --- !u!212 &212321125957375694
 SpriteRenderer:
   m_ObjectHideFlags: 1

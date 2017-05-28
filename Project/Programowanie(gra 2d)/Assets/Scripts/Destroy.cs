@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileDestroy : MonoBehaviour {
+public class Destroy : MonoBehaviour {
 
 
      public float timeAlive;

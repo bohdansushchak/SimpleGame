@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour {
     public GameObject bullet2;
     public GameObject bullet3;
     public GameObject bullet4;
+
+    public int countProjectile2;
+    public int countProjectile3;
+    public int countProjectile4;
     float fireRate = 0.5f;
     float nextFire = 0.0f;
     int numGun = 0;
@@ -55,13 +59,17 @@ public class PlayerController : MonoBehaviour {
                     fire(bullet1);
                     break;
                 case 1:
-                    fire(bullet2);
+                    if (countProjectile2 != 0 && fire(bullet2))
+                        --countProjectile2;                 
                     break;
                 case 2:
-                    fire(bullet3);
+                    if (countProjectile3 != 0 && fire(bullet3))
+                        --countProjectile3;
                     break;
                 case 3:
-                    fire(bullet4);
+
+                    if (countProjectile4 != 0 && fire(bullet4))
+                        --countProjectile4;
                     break;
             }
 
@@ -72,8 +80,6 @@ public class PlayerController : MonoBehaviour {
             else
                 numGun = 0;
         }
-
-
 
     }
 	
@@ -107,15 +113,37 @@ public class PlayerController : MonoBehaviour {
        
     }
 
-    void fire(GameObject bullet) {
-        if(Time.time > nextFire){
+    bool fire(GameObject bullet) {
+        if (Time.time > nextFire)
+        {
             nextFire = Time.time + fireRate;
-            if (facingRight) 
+            if (facingRight)
                 Instantiate(bullet, gunTip.position, Quaternion.Euler(new Vector3(0, 0, 0)));
 
             else
                 Instantiate(bullet, gunTip.position, Quaternion.Euler(new Vector3(0, 0, 180f)));
-            
+
+            return true;
+
         }
+        else return false; 
     }
+
+    public void addAmmo(int count, int id)
+    {
+        switch (id)
+        {
+            case 2:
+                countProjectile2 += count;
+                break;
+            case 3:
+                countProjectile3 += count;
+                break;
+            case 4:
+                countProjectile4 += count;
+                break;
+        }
+        
+    }
+
 }
