@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dabd81c26fa9c34b8f2912ba6d5cc92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponDamage: 15
+  WeaponDamage: 20
   explosionEffect: {fileID: 1357284403748104, guid: 8f5feeec6e6b5524f91337d554d8e7b8,
     type: 2}
 --- !u!114 &114850796085770476

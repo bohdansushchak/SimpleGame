@@ -35,7 +35,7 @@ public class ProjectileHit : MonoBehaviour {
         }
     }
 
-    void OnTriggerStay2D(Collider2D collision) {
+    /*void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Shootable")){
             PC.removeForce();
             Instantiate(explosionEffect, transform.position, transform.rotation);
@@ -46,7 +46,9 @@ public class ProjectileHit : MonoBehaviour {
                 hurtEnemy.addDamage(WeaponDamage);
             }
         }
-    }
+    }*/
+
+   
 
 
 

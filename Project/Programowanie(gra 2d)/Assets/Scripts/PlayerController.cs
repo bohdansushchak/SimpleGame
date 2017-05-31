@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -24,24 +25,36 @@ public class PlayerController : MonoBehaviour {
     public GameObject bullet2;
     public GameObject bullet3;
     public GameObject bullet4;
-
     public int countProjectile2;
     public int countProjectile3;
     public int countProjectile4;
     float fireRate = 0.5f;
     float nextFire = 0.0f;
     int numGun = 0;
+    public Slider equippedAmmo;
+    float timeChangeAmmo = 0.2f;
+    float nextChangeAmmo = 0;
+    public Text textAmmo2;
+    public Text textAmmo3;
+    public Text textAmmo4;
 
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
         facingRight = true;
+        equippedAmmo.maxValue = 3;
+        equippedAmmo.value = 0;
 
-	}
+        textAmmo2.text = countProjectile2.ToString();
+        textAmmo3.text = countProjectile3.ToString();
+        textAmmo4.text = countProjectile4.ToString();
+
+
+    }
 
     void Update(){
         if (grounded && Input.GetAxis("Jump") > 0)
@@ -60,25 +73,34 @@ public class PlayerController : MonoBehaviour {
                     break;
                 case 1:
                     if (countProjectile2 != 0 && fire(bullet2))
-                        --countProjectile2;                 
+                    {
+                        --countProjectile2;
+                        textAmmo2.text = countProjectile2.ToString();
+                    }    
                     break;
                 case 2:
                     if (countProjectile3 != 0 && fire(bullet3))
+                    {
                         --countProjectile3;
+                        textAmmo3.text = countProjectile3.ToString();
+
+                    }
                     break;
                 case 3:
 
                     if (countProjectile4 != 0 && fire(bullet4))
+                    {
                         --countProjectile4;
+                        textAmmo4.text = countProjectile4.ToString();
+
+                    }
+                        
                     break;
             }
 
         if (Input.GetAxis("Fire3") > 0)
         {
-            if (numGun < 3)
-                ++numGun;
-            else
-                numGun = 0;
+            changeAmmo();
         }
 
     }
@@ -106,11 +128,27 @@ public class PlayerController : MonoBehaviour {
     void flip() {
 
         facingRight = !facingRight;
-         Vector3 scale = transform.localScale;
-         scale.x *= -1;
-         transform.localScale = scale;
+        Vector3 scale = transform.localScale;
+        scale.x *= -1;
+        transform.localScale = scale;
 
        
+    }
+
+    void changeAmmo()
+    {
+        if(Time.time > nextChangeAmmo)
+        {
+            nextChangeAmmo = Time.time + timeChangeAmmo;
+
+            if (numGun < 3)
+                ++numGun;
+            else
+                numGun = 0;
+
+            equippedAmmo.value = numGun;
+        }
+
     }
 
     bool fire(GameObject bullet) {
@@ -135,15 +173,19 @@ public class PlayerController : MonoBehaviour {
         {
             case 2:
                 countProjectile2 += count;
+                textAmmo2.text = countProjectile2.ToString();
                 break;
             case 3:
                 countProjectile3 += count;
+                textAmmo3.text = countProjectile3.ToString();
                 break;
             case 4:
                 countProjectile4 += count;
+                textAmmo4.text = countProjectile4.ToString();
                 break;
         }
         
     }
+   
 
 }

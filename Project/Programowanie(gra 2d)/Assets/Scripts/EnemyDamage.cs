@@ -7,7 +7,6 @@ public class EnemyDamage : MonoBehaviour {
     public float damage;
     public float damageRate;
     public float pushBackForce;
-
     public float nextDamage;
 
 	// Use this for initialization
@@ -27,7 +26,6 @@ public class EnemyDamage : MonoBehaviour {
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
             playerHealth.addDamage(damage);
             nextDamage = Time.time + damageRate;
-
             pushBack(collision.transform);
         }
     }

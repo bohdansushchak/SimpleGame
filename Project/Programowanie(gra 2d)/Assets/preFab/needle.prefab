@@ -37,7 +37,6 @@ GameObject:
   - component: {fileID: 4424355596603024}
   - component: {fileID: 212346588550868278}
   - component: {fileID: 61145482499470372}
-  - component: {fileID: 114754512096399464}
   - component: {fileID: 114634412690653370}
   m_Layer: 0
   m_Name: needle
@@ -116,18 +115,6 @@ MonoBehaviour:
   damageRate: 1
   pushBackForce: 10
   nextDamage: 2
---- !u!114 &114754512096399464
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1610091376196210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 956af85f943ac0b4b8f62138347286ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 20
 --- !u!212 &212346588550868278
 SpriteRenderer:
   m_ObjectHideFlags: 1

@@ -1,23 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
 
 
-    public int LifeScore;
+    //public int LifeScore;
     public float FullHealth;
     public GameObject blood;
 
-    float currentHealt;
+    float currentHealth;
 
     PlayerController controlMovement;
+    public Slider healthSlider;
 
 	// Use this for initialization
 	void Start () {
-        currentHealt = FullHealth;
-
+        currentHealth = FullHealth;
         controlMovement = GetComponent<PlayerController>();
+
+        healthSlider.maxValue = FullHealth;
+        healthSlider.value = FullHealth;
+
+        //hearthImage.
  
 	}
 	
@@ -30,9 +36,10 @@ public class PlayerHealth : MonoBehaviour {
     {
         if (damage <= 0) return;
 
-        currentHealt -= damage;
+        currentHealth -= damage;
+        healthSlider.value = currentHealth;
 
-        if (currentHealt <= 0)
+        if (currentHealth <= 0)
             dead();
     } 
 
@@ -40,14 +47,22 @@ public class PlayerHealth : MonoBehaviour {
     {
         Instantiate(blood, transform.position, transform.rotation);
         gameObject.SetActive(false);
-        --LifeScore;
+        //--LifeScore;
 
-        if(LifeScore > 0)
+      /*  if(LifeScore > 0)
         {
             gameObject.SetActive(true);
-            currentHealt = FullHealth;
-        }
+            currentHealth = FullHealth;
+            healthSlider.value = currentHealth;
+        }*/
     }
 
+    public void addHealth(float health)
+    {
+        if (health + currentHealth <= FullHealth)
+            currentHealth += health;
+        else currentHealth = FullHealth;
 
+        healthSlider.value = currentHealth;
+    }
 }

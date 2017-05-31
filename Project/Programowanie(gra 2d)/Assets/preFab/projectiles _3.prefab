@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dabd81c26fa9c34b8f2912ba6d5cc92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponDamage: 30
+  WeaponDamage: 50
   explosionEffect: {fileID: 1221980095713080, guid: 86fbc7dede65f3047940c83fb52aecbf,
     type: 2}
 --- !u!114 &114806221114454010
@@ -104,7 +104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e7d2170283c174fb03d6056412d84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeAlive: 2
+  timeAlive: 3
 --- !u!114 &114877185112042402
 MonoBehaviour:
   m_ObjectHideFlags: 1
