@@ -32,10 +32,15 @@ public class ProjectileHit : MonoBehaviour {
                 hurtEnemy.addDamage(WeaponDamage);
   
             }
+            if(collision.tag == "Player")
+            {
+                PlayerHealth hurtPlayer = collision.gameObject.GetComponent<PlayerHealth>();
+                hurtPlayer.addDamage(WeaponDamage);
+            }
         }
     }
 
-    void OnTriggerStay2D(Collider2D collision) {
+    /*void OnTriggerStay2D(Collider2D collision) {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Shootable")){
             PC.removeForce();
             Instantiate(explosionEffect, transform.position, transform.rotation);
@@ -46,7 +51,9 @@ public class ProjectileHit : MonoBehaviour {
                 hurtEnemy.addDamage(WeaponDamage);
             }
         }
-    }
+    }*/
+
+   
 
 
 

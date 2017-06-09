@@ -1,23 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour {
 
 
-    public int LifeScore;
-    public float FullHealth;
+    //public int LifeScore;
+    public float fullHealth;
     public GameObject blood;
+    public GameObject playerMenu;
+    PlayMenuListener menu;
 
-    float currentHealt;
+    float currentHealth;
 
-    PlayerController controlMovement;
+    public Slider healthSlider;
 
 	// Use this for initialization
 	void Start () {
-        currentHealt = FullHealth;
 
-        controlMovement = GetComponent<PlayerController>();
+        currentHealth = PlayerPrefs.GetFloat("PlayerHealth", fullHealth);
+        menu = playerMenu.GetComponent<PlayMenuListener>();
+
+
+        healthSlider.maxValue = fullHealth;
+        healthSlider.value = currentHealth;
+
  
 	}
 	
@@ -30,9 +38,10 @@ public class PlayerHealth : MonoBehaviour {
     {
         if (damage <= 0) return;
 
-        currentHealt -= damage;
+        currentHealth -= damage;
+        healthSlider.value = currentHealth;
 
-        if (currentHealt <= 0)
+        if (currentHealth <= 0)
             dead();
     } 
 
@@ -40,14 +49,32 @@ public class PlayerHealth : MonoBehaviour {
     {
         Instantiate(blood, transform.position, transform.rotation);
         gameObject.SetActive(false);
-        --LifeScore;
+        menu.DeadPlayer = true;
+        playerMenu.SetActive(true);
 
-        if(LifeScore > 0)
+
+        //Destroy(gameObject, 1f);
+        //--LifeScore;
+
+      /*  if(LifeScore > 0)
         {
             gameObject.SetActive(true);
-            currentHealt = FullHealth;
-        }
+            currentHealth = FullHealth;
+            healthSlider.value = currentHealth;
+        }*/
     }
 
+    public void addHealth(float health)
+    {
+        if (health + currentHealth <= fullHealth)
+            currentHealth += health;
+        else currentHealth = fullHealth;
 
+        healthSlider.value = currentHealth;
+    }
+
+    public float Health
+    {
+        get { return currentHealth; }
+    }
 }
