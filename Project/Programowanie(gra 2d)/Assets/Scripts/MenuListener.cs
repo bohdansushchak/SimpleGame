@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuListener : MonoBehaviour {
 
@@ -8,14 +9,20 @@ public class MenuListener : MonoBehaviour {
     public GameObject PLoadLevel;
     public GameObject PSettings;
 
+    
+
 	public void NewGame()
     {
-        //Application.LoadLevel(1); // для загрузки першого левелу
+
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("level1", LoadSceneMode.Single);
+        
     }
 
     public void Resume()
     {
-
+        string level = PlayerPrefs.GetString("ResumeLevel", "level1"); 
+        SceneManager.LoadScene(level);
     } 
 
     public void LoadLevel()
@@ -28,7 +35,7 @@ public class MenuListener : MonoBehaviour {
 
     public void Multiplayer()
     {
-
+        SceneManager.LoadScene("Multiplayer_Level", LoadSceneMode.Single);
     } 
 
     public void Settings()
@@ -46,12 +53,13 @@ public class MenuListener : MonoBehaviour {
 
     public void Level1()
     {
-        Application.LoadLevel(1); // для загрузки першого левелу
+        SceneManager.LoadScene("level1", LoadSceneMode.Single);
+
     }
 
     public void Level2()
     {
-        Application.LoadLevel(2); // для загрузки першого левелу
+        SceneManager.LoadScene("level2", LoadSceneMode.Single);
     }
 
     public void Level3()

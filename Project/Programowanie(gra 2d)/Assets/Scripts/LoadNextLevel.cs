@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LoadNextLevel : MonoBehaviour {
 
-    public int NextLevel;
+    public string NextLevel;
     public float timeWait;
 
     float time;
@@ -20,7 +21,9 @@ public class LoadNextLevel : MonoBehaviour {
     void Update()
     {
         if (time < Time.time && isFinish)
-            Application.LoadLevel(NextLevel);
+            //Application.LoadLevel(NextLevel);
+            SceneManager.LoadScene(NextLevel, LoadSceneMode.Single);
+            
 
     }
 

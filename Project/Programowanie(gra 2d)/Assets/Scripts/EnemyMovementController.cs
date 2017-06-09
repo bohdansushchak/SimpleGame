@@ -7,7 +7,6 @@ public class EnemyMovementController : MonoBehaviour {
 
     public float walkSpeed;
     public float runSpeed;
-    public GameObject dropItem;
 
     Animator anim;
     Rigidbody2D enemyBody;
@@ -19,7 +18,7 @@ public class EnemyMovementController : MonoBehaviour {
     float flipTime = 2;
 
     bool walking;
-    bool run;
+    //bool run;
     bool attack;
 
     bool barrier;
@@ -28,6 +27,8 @@ public class EnemyMovementController : MonoBehaviour {
     float groundCheckValue = 0.2f;
     public LayerMask groundLayer;
     public Transform groundCheck;
+
+    float time = 0;
 
 
 
@@ -41,31 +42,36 @@ public class EnemyMovementController : MonoBehaviour {
         nextFlipChance = 0;
 
         walking = false;
-        run = false;
+        //run = false;
         attack = false;
         grounded = false;
 
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckValue, groundLayer);
-
-        if (barrier || !grounded)
-                flip();
-
         if (attack)
         {
             walking = false;
-            run = false;
+        //    anim.SetBool("hit", attack);
+         //   anim.SetBool("run", walking);
+
         }
         else
         {
             walking = true;
-            run = false;
-        }
 
+
+            grounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckValue, groundLayer);
+
+
+            if ((barrier || !grounded) && (Time.time > time))
+            {
+                flip();
+                time = Time.time + Random.Range(0.1f, 0.4f);
+
+            }
 
             if (Time.time > nextFlipChance && !attack)
             {
@@ -76,33 +82,38 @@ public class EnemyMovementController : MonoBehaviour {
                 else
                     walking = true;
             }
-        if (walking)
-        {
-            if (health.HalfHeath)
-                run = true;
-            else run = false;
-        }
 
-        if (run)
-        {
-            Animator("run", run);
-            Move(runSpeed);
+            if (walking && !barrier)
+            {
+                if (health.HalfHeath)
+                    Move(runSpeed);
+                else Move(walkSpeed);
+            }
+
+           
+
+
+            /*      if (run)
+                  {
+                      //Animator("run", run);
+                      Move(runSpeed);
+                  }
+                  else if (walking)
+                  {
+                      Move(walkSpeed);
+                      //Animator("run", false);
+                  }*/
         }
-        else if (walking)
-        {
-            Move(walkSpeed);
-            Animator("run", false);
-        }
+        anim.SetBool("run", walking);
+        anim.SetBool("hit", attack);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Player") { 
             attack = false;
-            Animator("isHit", attack);
-        }
-
-        if (collision.tag == "Enemy")
+            //Animator("isHit", false);
+        } else if (collision.tag == "Enemy")
             barrier = false;
     }
 
@@ -112,25 +123,38 @@ public class EnemyMovementController : MonoBehaviour {
 
         if (collision.tag == "Player") {
             attack = true;
-            Animator("isHit", attack);
-            Animator("run", false);
+           // Animator("isHit", attack);
+           // Animator("run", false);
 
         }
+        else if (collision.tag == "Enemy")
+            barrier = true;
 
-        if (collision.tag == "Enemy")
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+
+        if (collision.tag == "Player")
+        {
+            attack = true;
+            //Animator("isHit", attack);
+            //Animator("run", false);
+
+        }
+        else if (collision.tag == "Enemy")
             barrier = true;
 
     }
 
 
-   void Move(float speed)
+    void Move(float speed)
    {
        if (facingRight)
            enemyBody.velocity = new Vector2(1 * speed, enemyBody.velocity.y);
        else
            enemyBody.velocity = new Vector2(-1 * speed, enemyBody.velocity.y);
 
-        Animator("run", true);
+       // Animator("run", true);
    }
 
     void flip()
@@ -141,11 +165,11 @@ public class EnemyMovementController : MonoBehaviour {
         transform.localScale = scale;
     }
 
-    void Animator(string var, bool value)
+   /* void Animator(string var, bool value)
     {
-        if (anim == null)
-            Destroy(gameObject);
+        if (anim != null)
+            //Destroy(gameObject);
         anim.SetBool(var, value);
-    }
+    }*/
 }
    

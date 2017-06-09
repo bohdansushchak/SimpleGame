@@ -6,19 +6,16 @@ public class CameraFollow : MonoBehaviour {
 
 
     public Transform target;
+
     public float smoothing;
 
 
     public float minX;
     public float minY;
-    //public float minZ;
 
     public float maxX;
     public float maxY;
-   // public float maxZ;
 
-    Vector3 max;
-    Vector3 min;
 
     Vector3 offset;
     float lowV;
@@ -26,11 +23,22 @@ public class CameraFollow : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        min = new Vector3(minX, minY, 0);
-        max = new Vector3(maxX, maxY, 0);
-        
+        float x = PlayerPrefs.GetFloat("CameraPosX", transform.position.x);
+        float y = PlayerPrefs.GetFloat("CameraPosY", transform.position.y);
+        float z = PlayerPrefs.GetFloat("CameraPosZ", transform.position.z);
+
+        Debug.Log("camX = " + x);
+        Debug.Log("camY = " + y);
+        Debug.Log("camZ = " + z);
+
+        transform.position = new Vector3(x, y, z);
+
+
         offset = transform.position - target.position;
-        lowV = transform.position.y;
+
+ 
+
+        //lowV = transform.position.y;
 
 	}
 	
@@ -38,22 +46,24 @@ public class CameraFollow : MonoBehaviour {
 	void FixedUpdate () {
         
         Vector3 targetCamPos = target.position + offset;
-        if (asd(targetCamPos)){
 
-            transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
+        if (targetCamPos.x <= minX)
+            targetCamPos.x = minX;
+
+        if (targetCamPos.y <= minY)
+            targetCamPos.y = minY;
+
+        if (targetCamPos.x >= maxX)
+            targetCamPos.x = maxX;
+
+        if (targetCamPos.y >= maxY)
+                targetCamPos.y = maxY;
 
 
-            if (transform.position.y < lowV)
-                transform.position = new Vector3(transform.position.x, lowV, transform.position.z);
-        }
+        transform.position = Vector3.Lerp(transform.position, targetCamPos, smoothing * Time.deltaTime);
 
 	}
 
 
-    bool asd(Vector3 pos)
-    {
-        if ((minX <= pos.x && pos.x <= maxX) || (minY <= pos.y && pos.y <= maxY))
-            return true;
-        else return false;
-    }  
+
 }

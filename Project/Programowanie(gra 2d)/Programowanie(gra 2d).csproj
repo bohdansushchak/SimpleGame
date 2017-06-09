@@ -81,6 +81,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\NetworkProjectileControler.cs" />
     <Compile Include="Assets\Scripts\AddHealth.cs" />
     <Compile Include="Assets\Scripts\AmmoControler.cs" />
     <Compile Include="Assets\Scripts\CameraFollow.cs" />
@@ -90,8 +91,10 @@
     <Compile Include="Assets\Scripts\EnemyMovementController.cs" />
     <Compile Include="Assets\Scripts\LoadNextLevel.cs" />
     <Compile Include="Assets\Scripts\MenuListener.cs" />
+    <Compile Include="Assets\Scripts\PlayMenuListener.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />
+    <Compile Include="Assets\Scripts\PlayerSetup.cs" />
     <Compile Include="Assets\Scripts\ProjectileControler.cs" />
     <Compile Include="Assets\Scripts\ProjectileHit.cs" />
     <Compile Include="Assets\Scripts\Settings_value.cs" />

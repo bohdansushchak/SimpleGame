@@ -32,6 +32,11 @@ public class ProjectileHit : MonoBehaviour {
                 hurtEnemy.addDamage(WeaponDamage);
   
             }
+            if(collision.tag == "Player")
+            {
+                PlayerHealth hurtPlayer = collision.gameObject.GetComponent<PlayerHealth>();
+                hurtPlayer.addDamage(WeaponDamage);
+            }
         }
     }
 

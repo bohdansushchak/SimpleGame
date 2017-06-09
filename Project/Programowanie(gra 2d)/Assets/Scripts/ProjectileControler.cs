@@ -19,11 +19,6 @@ public class ProjectileControler : MonoBehaviour {
             body.AddForce(new Vector2(1, 0) * speed, ForceMode2D.Impulse);
     }
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void removeForce()
     {
         body.velocity = new Vector2(0, 0);

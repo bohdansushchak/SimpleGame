@@ -7,23 +7,25 @@ public class PlayerHealth : MonoBehaviour {
 
 
     //public int LifeScore;
-    public float FullHealth;
+    public float fullHealth;
     public GameObject blood;
+    public GameObject playerMenu;
+    PlayMenuListener menu;
 
     float currentHealth;
 
-    PlayerController controlMovement;
     public Slider healthSlider;
 
 	// Use this for initialization
 	void Start () {
-        currentHealth = FullHealth;
-        controlMovement = GetComponent<PlayerController>();
 
-        healthSlider.maxValue = FullHealth;
-        healthSlider.value = FullHealth;
+        currentHealth = PlayerPrefs.GetFloat("PlayerHealth", fullHealth);
+        menu = playerMenu.GetComponent<PlayMenuListener>();
 
-        //hearthImage.
+
+        healthSlider.maxValue = fullHealth;
+        healthSlider.value = currentHealth;
+
  
 	}
 	
@@ -47,6 +49,11 @@ public class PlayerHealth : MonoBehaviour {
     {
         Instantiate(blood, transform.position, transform.rotation);
         gameObject.SetActive(false);
+        menu.DeadPlayer = true;
+        playerMenu.SetActive(true);
+
+
+        //Destroy(gameObject, 1f);
         //--LifeScore;
 
       /*  if(LifeScore > 0)
@@ -59,10 +66,15 @@ public class PlayerHealth : MonoBehaviour {
 
     public void addHealth(float health)
     {
-        if (health + currentHealth <= FullHealth)
+        if (health + currentHealth <= fullHealth)
             currentHealth += health;
-        else currentHealth = FullHealth;
+        else currentHealth = fullHealth;
 
         healthSlider.value = currentHealth;
+    }
+
+    public float Health
+    {
+        get { return currentHealth; }
     }
 }
