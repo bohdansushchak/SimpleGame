@@ -1224,6 +1224,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 114157462398550458, guid: 2683f024f0b2d1d469ee05ba044e6876,
+        type: 2}
+      propertyPath: playerMenu
+      value: 
+      objectReference: {fileID: 298126911}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2683f024f0b2d1d469ee05ba044e6876, type: 2}
   m_IsPrefabParent: 0
@@ -1976,7 +1981,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4835267162924272, guid: 4cb298ed7f2a6594fb22b60c038a864a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -282.7
+      value: 246.4
       objectReference: {fileID: 0}
     - target: {fileID: 4835267162924272, guid: 4cb298ed7f2a6594fb22b60c038a864a, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2036,6 +2041,11 @@ Prefab:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 575385624}
+    - target: {fileID: 114643160994368750, guid: 4cb298ed7f2a6594fb22b60c038a864a,
+        type: 2}
+      propertyPath: countProjectile4
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4cb298ed7f2a6594fb22b60c038a864a, type: 2}
   m_IsPrefabParent: 0
@@ -2764,7 +2774,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2133163225}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -275, y: -3.9, z: -80}
+  m_LocalPosition: {x: 244, y: -3.9, z: -80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

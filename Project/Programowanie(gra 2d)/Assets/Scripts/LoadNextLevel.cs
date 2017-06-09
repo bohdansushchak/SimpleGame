@@ -8,6 +8,9 @@ public class LoadNextLevel : MonoBehaviour {
     public string NextLevel;
     public float timeWait;
 
+    private PlayerController playerController;
+    private PlayerHealth playerHealth;
+
     float time;
     bool isFinish;
 
@@ -21,10 +24,15 @@ public class LoadNextLevel : MonoBehaviour {
     void Update()
     {
         if (time < Time.time && isFinish)
-            //Application.LoadLevel(NextLevel);
+        {
             SceneManager.LoadScene(NextLevel, LoadSceneMode.Single);
-            
+   
+            PlayerPrefs.SetInt("bullet2", playerController.Bullet2);
+            PlayerPrefs.SetInt("bullet3", playerController.Bullet3);
+            PlayerPrefs.SetInt("bullet4", playerController.Bullet4);
+            PlayerPrefs.SetFloat("PlayerHealth", playerHealth.Health);
 
+        }
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -33,6 +41,11 @@ public class LoadNextLevel : MonoBehaviour {
         {
             time = Time.time + timeWait;
             isFinish = true;
+            playerController = collision.GetComponent<PlayerController>();
+            playerHealth = collision.GetComponent<PlayerHealth>();
+
+
+
         }
     }
 }
