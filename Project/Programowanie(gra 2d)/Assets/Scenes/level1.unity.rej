@@ -1,0 +1,13 @@
+diff a/Project/Programowanie(gra 2d)/Assets/Scenes/level1.unity b/Project/Programowanie(gra 2d)/Assets/Scenes/level1.unity	(rejected hunks)
+@@ -1224,6 +1224,11 @@
+       propertyPath: m_RootOrder
+       value: 13
+       objectReference: {fileID: 0}
++    - target: {fileID: 114157462398550458, guid: 2683f024f0b2d1d469ee05ba044e6876,
++        type: 2}
++      propertyPath: playerMenu
++      value: 
++      objectReference: {fileID: 298126911}
+     m_RemovedComponents: []
+   m_ParentPrefab: {fileID: 100100000, guid: 2683f024f0b2d1d469ee05ba044e6876, type: 2}
+   m_IsPrefabParent: 0
