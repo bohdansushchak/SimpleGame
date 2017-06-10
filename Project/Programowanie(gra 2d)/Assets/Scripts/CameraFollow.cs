@@ -8,17 +8,19 @@ public class CameraFollow : MonoBehaviour {
     public Transform target;
 
     public float smoothing;
-
-
+    Vector3 offset;
+    float lowV;
     public float minX;
     public float minY;
 
     public float maxX;
     public float maxY;
 
+    //for music
+    AudioSource audio;
+    float musicVolume;
 
-    Vector3 offset;
-    float lowV;
+
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +28,12 @@ public class CameraFollow : MonoBehaviour {
         float x = PlayerPrefs.GetFloat("CameraPosX", transform.position.x);
         float y = PlayerPrefs.GetFloat("CameraPosY", transform.position.y);
         float z = PlayerPrefs.GetFloat("CameraPosZ", transform.position.z);
+
+        musicVolume = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        audio = GetComponent<AudioSource>();
+        audio.loop = true;
+        audio.playOnAwake = true;
+        audio.volume = musicVolume;
 
         Debug.Log("camX = " + x);
         Debug.Log("camY = " + y);

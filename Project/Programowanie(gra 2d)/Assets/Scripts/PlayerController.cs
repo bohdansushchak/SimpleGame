@@ -42,7 +42,10 @@ public class PlayerController : MonoBehaviour {
 
     //for PlayerMenu
     public GameObject playerMenu;
-    
+
+
+    //for music
+    AudioPlay player;
 
 
 
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviour {
     void Start () {
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        player = GetComponentInChildren<AudioPlay>();
 
         float x = PlayerPrefs.GetFloat("PlayerPosX", transform.position.x);
         float y = PlayerPrefs.GetFloat("PlayerPosY", transform.position.y);
@@ -79,6 +83,7 @@ public class PlayerController : MonoBehaviour {
             grounded = false;
             anim.SetBool("isGround", true);
             body.AddForce(new Vector2(0, jumpHeight));
+            player.Jump();
         }
 
 
@@ -88,12 +93,14 @@ public class PlayerController : MonoBehaviour {
             switch (numGun)
             {
                 case 0:
-                    fire(bullet1);
+                    if(fire(bullet1))
+                        player.Shoot_p1();
                     break;
                 case 1:
                     if (countProjectile2 != 0 && fire(bullet2))
                     {
                         --countProjectile2;
+                        player.Shoot_p2();
                         textAmmo2.text = countProjectile2.ToString();
                     }
                     break;
@@ -101,6 +108,7 @@ public class PlayerController : MonoBehaviour {
                     if (countProjectile3 != 0 && fire(bullet3))
                     {
                         --countProjectile3;
+                        player.Shoot_p3();
                         textAmmo3.text = countProjectile3.ToString();
 
                     }
@@ -110,6 +118,7 @@ public class PlayerController : MonoBehaviour {
                     if (countProjectile4 != 0 && fire(bullet4))
                     {
                         --countProjectile4;
+                        player.Shoot_p4();
                         textAmmo4.text = countProjectile4.ToString();
 
                     }
@@ -153,9 +162,9 @@ public class PlayerController : MonoBehaviour {
         anim.SetFloat("verticalSpeed", body.velocity.y);
 
         
-
         float move = Input.GetAxis("Horizontal");  // може бути -1 або 1 (вправо або вліво)
         anim.SetFloat("speed", Mathf.Abs(move));
+
 
         body.velocity = new Vector2(move * speed, body.velocity.y);
         if(move > 0 && !facingRight)
@@ -165,6 +174,9 @@ public class PlayerController : MonoBehaviour {
         {
             flip();
         }
+
+       // if (move != 0)
+           // player.Walk();
 	}
 
     void flip() {

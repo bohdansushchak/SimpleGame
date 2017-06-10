@@ -13,7 +13,6 @@ public class ProjectileHit : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
         PC = GetComponentInParent<ProjectileControler>();
-
     }
 	
 	// Update is called once per frame
@@ -27,6 +26,9 @@ public class ProjectileHit : MonoBehaviour {
             PC.removeForce();
             Instantiate(explosionEffect, transform.position, transform.rotation);
             Destroy(gameObject);
+            
+
+
             if (collision.tag == "Enemy") {
                 EnemyHealth hurtEnemy = collision.gameObject.GetComponent<EnemyHealth>();
                 hurtEnemy.addDamage(WeaponDamage);
