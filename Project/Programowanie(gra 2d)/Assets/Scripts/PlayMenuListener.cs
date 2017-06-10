@@ -14,9 +14,7 @@ public class PlayMenuListener : MonoBehaviour {
     PlayerHealth playerHealth;
     PlayerController playerController;
 
-
-
-
+  
 
     public void Resume()
     {
@@ -76,6 +74,8 @@ public class PlayMenuListener : MonoBehaviour {
     {
         set { deadPlayer = value; }
     }
+
+
 
 
 
